@@ -1,0 +1,25 @@
+{
+  "name": "notting",
+  "scripts": {
+    "dev": "tsx --env-file=.env --watch src/index.ts",
+    "start": "tsx --env-file=.env src/index.ts",
+    "test:_base": "vitest",
+    "test:unit": "pnpm run test:_base --config src/vitest.config.unit.ts run .",
+    "test:integration": "pnpm run test:_base --config src/vitest.config.integration.ts run .",
+    "test": "pnpm run test:_base run ."
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.12.2",
+    "hono": "^4.5.11"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@types/node": "^20.11.17",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "tsx": "^4.7.1",
+    "typescript-eslint": "^8.4.0",
+    "vitest": "^2.0.5"
+  }
+}

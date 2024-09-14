@@ -1,16 +1,40 @@
 import { serve } from "@hono/node-server";
-import { Hono } from "hono";
+import { createApp } from "./app/core";
+import { createInMemoryNoteRepository } from "./driven-adapters/note-repository/in-memory";
+import { createHonoInteractor } from "./driver-adapters/interactor/hono";
 
-const app = new Hono();
+const PORT = Number(process.env.PORT) || 3000;
 
-app.get("/", c => {
-  return c.text("Hello Hono!");
-});
-
-const port = 3000;
-console.log(`Server is running on port ${port}`);
+const repository = createInMemoryNoteRepository();
+const noteService = createApp(repository);
+const app = createHonoInteractor(noteService);
 
 serve({
   fetch: app.fetch,
-  port,
+  port: PORT,
+});
+
+console.debug({
+  message: "Server started",
+  port: PORT,
+});
+
+process.on("unhandledRejection", error => {
+  console.error("Unhandled Rejection:", error);
+  process.exit(1);
+});
+
+process.on("uncaughtException", error => {
+  console.error("Uncaught Exception:", error);
+  process.exit(1);
+});
+
+process.on("SIGINT", () => {
+  console.debug("Server shutting down...");
+  process.exit(0);
+});
+
+process.on("SIGTERM", () => {
+  console.debug("Server shutting down...");
+  process.exit(0);
 });

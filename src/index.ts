@@ -23,26 +23,26 @@ async function startServer() {
     message: "Server started",
     port: PORT,
   });
-
-  process.on("unhandledRejection", error => {
-    console.error("Unhandled Rejection:", error);
-    process.exit(1);
-  });
-
-  process.on("uncaughtException", error => {
-    console.error("Uncaught Exception:", error);
-    process.exit(1);
-  });
-
-  process.on("SIGINT", () => {
-    console.debug("Server shutting down...");
-    process.exit(0);
-  });
-
-  process.on("SIGTERM", () => {
-    console.debug("Server shutting down...");
-    process.exit(0);
-  });
 }
+
+process.on("unhandledRejection", error => {
+  console.error("Unhandled Rejection:", error);
+  process.exit(1);
+});
+
+process.on("uncaughtException", error => {
+  console.error("Uncaught Exception:", error);
+  process.exit(1);
+});
+
+process.on("SIGINT", () => {
+  console.debug("Server shutting down...");
+  process.exit(0);
+});
+
+process.on("SIGTERM", () => {
+  console.debug("Server shutting down...");
+  process.exit(0);
+});
 
 startServer();

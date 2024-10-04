@@ -11,7 +11,7 @@ const createHonoInteractor = (noteService: App) => {
   app.use(logger());
   app.use(prettyJSON());
   app.use(secureHeaders());
-  app.use("*", requestId());
+  app.use(requestId());
 
   app.get("/notes", async c => {
     const notes = await noteService.getAllNotes();

@@ -1,6 +1,6 @@
 import { serve } from "@hono/node-server";
 import { createApp } from "./app/core";
-import { createHonoInteractor } from "./driver-adapters/interactor/hono";
+import { createHonoInteractor } from "./driver-adapters/for-running-app/hono";
 import { createTursoNoteRepository } from "./driven-adapters/note-repository/turso";
 
 const PORT = Number(process.env.PORT) || 3000;
